@@ -1,12 +1,20 @@
 <template>
   <v-app>
-   <h1>Template for Vue Js app</h1>
-   <router-view></router-view>
+    <router-view></router-view>
+    <Footer/>
   </v-app>
 </template>
 
 <script>
+import Footer from '@/components/Footer'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Footer
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

@@ -10,8 +10,8 @@ new Vue({
   router,
   store,
   vuetify,
-  async created () {
-    await this.$store.dispatch('getCurrentUser')
-  },
+  // async created () {
+  //   await this.$store.dispatch('getCurrentUser')
+  // },
   render: h => h(App)
 }).$mount('#app')
