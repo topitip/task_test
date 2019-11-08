@@ -1,10 +1,9 @@
 <template>
   <v-card
-    class="ml-5"
     width="270"
   >
     <v-list>
-      <v-list-item>
+      <v-list-item @click="showTabel('home')">
         <v-list-item-icon>
           <v-icon>mdi-home</v-icon>
         </v-list-item-icon>
@@ -35,6 +34,7 @@
             v-for="(admin, i) in admins"
             :key="i"
             link
+            @click="showTabel(admin[2])"
           >
             <v-list-item-title v-text="admin[0]"></v-list-item-title>
             <v-list-item-icon>
@@ -73,8 +73,8 @@ export default {
   name: 'SideBar',
   data: () => ({
     admins: [
-      ['Management', 'mdi-account-multiple'],
-      ['Settings', 'mdi-settings']
+      ['Management', 'mdi-account-multiple', 'tab1'],
+      ['Settings', 'mdi-settings', 'settings']
     ],
     cruds: [
       ['Create', 'mdi-plus'],
@@ -82,7 +82,13 @@ export default {
       ['Update', 'mdi-update'],
       ['Delete', 'mdi-delete']
     ]
-  })
+  }),
+
+  methods: {
+    showTabel (tabell) {
+      this.$store.state.user.tabel = tabell
+    }
+  }
 }
 </script>
 

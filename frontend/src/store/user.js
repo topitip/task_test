@@ -3,8 +3,9 @@ import userAPI from '@/api/user'
 export default {
 
   state: {
-    users: undefined,
-    current: undefined
+    students: undefined,
+    current: undefined,
+    tabel: 'home'
   },
 
   mutations: {
