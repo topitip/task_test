@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import user from '@/store/user'
+
 export default {
   name: 'TableWithStudents',
   data () {
@@ -53,6 +55,33 @@ export default {
           data: []
         }
       ]
+    }
+  },
+
+  computed: {
+    count () {
+      return user.state.students
+    },
+    lessons () {
+      return user.state.lessons
+    }
+  },
+
+  watch: {
+    count (newCount, oldCount) {
+      this.students.data = newCount.students
+      this.headers.push(newCount.headers)
+    },
+    lessons (newCount, oldCount) {
+      let head = this.headers
+      this.$store.state.user.lessons.forEach(function callback (element, index) {
+        head.push(
+          {
+            text: element.lessonTitle,
+            value: 'lessonTitle' + index
+          }
+        )
+      })
     }
   }
 }

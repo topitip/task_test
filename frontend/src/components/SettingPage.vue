@@ -1,19 +1,26 @@
 <template>
   <v-flex lg9 ml-5>
     <v-card>
-      <v-text-field
-        name="name"
-        label="label"
-        value="value"
-        single-line
-      ></v-text-field>
+      <AddLesson />
+      <TableWithLessons />
     </v-card>
   </v-flex>
 </template>
 
 <script>
+import AddLesson from '@/components/SettingPageComp/AddLesson'
+import TableWithLessons from '@/components/SettingPageComp/TableWithLessons'
+
 export default {
-  name: 'SettingPage'
+  name: 'SettingPage',
+  components: {
+    AddLesson,
+    TableWithLessons
+  },
+  data () {
+    return {
+    }
+  }
 }
 </script>
 

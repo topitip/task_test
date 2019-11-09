@@ -3,8 +3,38 @@ import userAPI from '@/api/user'
 export default {
 
   state: {
-    students: undefined,
+    students: [
+      {
+        FullName: 'Артур Яковлев',
+        data: []
+      },
+      {
+        FullName: 'Антон Николаев',
+        data: []
+      },
+      {
+        FullName: 'Роман Никольский',
+        data: []
+      },
+      {
+        FullName: 'Роман Никольский',
+        data: []
+      },
+      {
+        FullName: 'Алексей Лутковский',
+        data: []
+      },
+      {
+        FullName: 'Карл Маркс',
+        data: []
+      },
+      {
+        FullName: 'Стив Джобс',
+        data: []
+      }
+    ],
     current: undefined,
+    lessons: [],
     tabel: 'home'
   },
 
