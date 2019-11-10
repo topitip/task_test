@@ -21,7 +21,7 @@
           v-model="lesson.lessonHours"
           v-mask="'###'"
 
-          v-validate="'required|min_value:10|max_value:160'"
+          v-validate="'required|min_value:20|max_value:160'"
           data-vv-name="lessonHours"
           :error-messages="errors.collect('lessonHours')"
           required

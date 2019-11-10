@@ -73,7 +73,7 @@ export default {
   name: 'SideBar',
   data: () => ({
     admins: [
-      ['Management', 'mdi-account-multiple', 'tab1'],
+      ['Management', 'mdi-account-multiple', 'management'],
       ['Settings', 'mdi-settings', 'settings']
     ],
     cruds: [

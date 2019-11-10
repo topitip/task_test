@@ -27,32 +27,74 @@ export default {
       ],
       students: [
         {
+          id: 0,
           FullName: 'Артур Яковлев',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 1,
           FullName: 'Антон Николаев',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 2,
           FullName: 'Роман Никольский',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 3,
           FullName: 'Роман Никольский',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 4,
           FullName: 'Алексей Лутковский',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 5,
           FullName: 'Карл Маркс',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         },
         {
+          id: 6,
           FullName: 'Стив Джобс',
-          data: []
+          lessonTitle0: {},
+          lessonTitle1: {},
+          lessonTitle2: {},
+          lessonTitle3: {},
+          lessonTitle4: {},
+          lessonTitle5: {}
         }
       ]
     }
