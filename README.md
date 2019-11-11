@@ -16,8 +16,7 @@ systemctl start nginx
 Add virtual host:
 
 ```bash
-echo "127.0.0.1     xdocs.local" >> /etc/hosts
-echo "10.222.222.171 xdocs.cloud.local" >> /etc/hosts
+echo "127.0.0.1     task.local" >> /etc/hosts
 ```
 
 ### Конфигурация nginx
