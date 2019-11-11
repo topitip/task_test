@@ -9,17 +9,26 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex lg6>
-                <v-text-field v-model="editInf.skippingReason" label="Пропусков по причине"></v-text-field>
+                <v-text-field v-mask="'##'" v-model="editInf.skippingReason" label="Пропусков по причине"></v-text-field>
               </v-flex>
               <v-flex lg6>
-                <v-text-field v-model="editInf.skippingNoReason" label="Пропусков без причины"></v-text-field>
+                <v-text-field v-mask="'##'" v-model="editInf.skippingNoReason" label="Пропусков без причины"></v-text-field>
               </v-flex>
             </v-layout>
 
             <v-layout row wrap>
-              <v-btn small class="ma-5" color="primary" @click="addGrade">Добавить оценку</v-btn>
+              <v-btn small
+              class="ma-5"
+              color="primary"
+              @click="addGrade">Добавить оценку</v-btn>
               <v-flex lg6>
-                <v-text-field v-model="editInf.grade" label="Оценка"></v-text-field>
+                <v-text-field
+                v-mask="'#'"
+                v-validate="'required|min_value:2|max_value:5'"
+                data-vv-name="addGrade"
+                :error-messages="errors.collect('addGrade')"
+                v-model="editInf.grade" label="Оценка">
+                </v-text-field>
               </v-flex>
             </v-layout>
             <p>Добавленные оценки</p>
@@ -80,12 +89,29 @@
 
 <script>
 import user from '@/store/user'
+import { mask } from 'vue-the-mask'
 
 export default {
+  $_veeValidate: {
+    validator: 'new'
+  },
   name: 'ManageStudents',
+  directives: {
+    mask
+  },
   data () {
     return {
+      dictionary: {
+        custom: {
+          addGrade: {
+            min_value: 'Минимальная оценка - 2',
+            max_value: 'Максимальная оценка - 5'
+          }
+        }
+      },
+
       showEdit: false,
+
       editInfId: '',
       editInfLesson: undefined,
       editInf: {
@@ -101,6 +127,7 @@ export default {
           align: 'left',
           value: 'grade'
         }],
+
       headers: [
         {
           text: 'Имя студента',
@@ -110,6 +137,9 @@ export default {
       ],
       students: []
     }
+  },
+  mounted () {
+    this.$validator.localize('en', this.dictionary)
   },
 
   created () {
@@ -277,33 +307,36 @@ export default {
       }
     },
 
-    addGrade () {
-      this.editInfGrades.push({ grade: this.editInf.grade })
-      console.log(this.editInfGrades)
-      switch (this.editInfLesson) {
-        case 'lessonTitle0':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+    async addGrade () {
+      const valid = await this.$validator.validate()
+      if (valid) {
+        this.editInfGrades.push({ grade: this.editInf.grade })
+        console.log(this.editInfGrades)
+        switch (this.editInfLesson) {
+          case 'lessonTitle0':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
 
-        case 'lessonTitle1':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+          case 'lessonTitle1':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
 
-        case 'lessonTitle2':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+          case 'lessonTitle2':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
 
-        case 'lessonTitle3':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+          case 'lessonTitle3':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
 
-        case 'lessonTitle4':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+          case 'lessonTitle4':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
 
-        case 'lessonTitle5':
-          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
-          break
+          case 'lessonTitle5':
+            this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
+            break
+        }
       }
     }
   }
