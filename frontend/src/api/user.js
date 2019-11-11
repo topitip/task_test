@@ -36,7 +36,6 @@ export default {
   async getUsers () {
     try {
       const users = await axios.get('/users')
-      console.log(users.data)
       return users.data
     } catch (error) {
       return error.response.status

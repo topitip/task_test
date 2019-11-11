@@ -201,8 +201,7 @@ export default {
         }
       }
     ],
-    current: undefined,
-    headers: [],
+    headersGrades: [],
     lessons: [],
     tabel: 'home'
   },
@@ -215,10 +214,8 @@ export default {
       state.current = user
     },
     setGrade (state, payload) {
-      console.log(payload)
       switch (payload.lesson) {
         case 'lessonTitle0':
-          console.log(payload.student)
           state.students[payload.student].lessonTitle0.grades.push({
             grade: payload.grade
           })
@@ -260,10 +257,9 @@ export default {
       }
     },
     setSkeap (state, payload) {
-      console.log(payload)
       switch (payload.lesson) {
         case 'lessonTitle0':
-          console.log(payload.student)
+          state.students[payload.student].lessonTitle0.skeaps = []
           state.students[payload.student].lessonTitle0.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason
@@ -271,6 +267,7 @@ export default {
           break
 
         case 'lessonTitle1':
+          state.students[payload.student].lessonTitle1.skeaps = []
           state.students[payload.student].lessonTitle1.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason
@@ -278,6 +275,7 @@ export default {
           break
 
         case 'lessonTitle2':
+          state.students[payload.student].lessonTitle2.skeaps = []
           state.students[payload.student].lessonTitle2.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason
@@ -285,6 +283,7 @@ export default {
           break
 
         case 'lessonTitle3':
+          state.students[payload.student].lessonTitle3.skeaps = []
           state.students[payload.student].lessonTitle3.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason
@@ -292,6 +291,7 @@ export default {
           break
 
         case 'lessonTitle4':
+          state.students[payload.student].lessonTitle4.skeaps = []
           state.students[payload.student].lessonTitle4.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason
@@ -299,6 +299,7 @@ export default {
           break
 
         case 'lessonTitle5':
+          state.students[payload.student].lessonTitle5.skeaps = []
           state.students[payload.student].lessonTitle5.skeaps.push({
             skippingReason: payload.skippingReason,
             skippingNoReason: payload.skippingNoReason

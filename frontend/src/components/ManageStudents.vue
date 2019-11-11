@@ -25,7 +25,7 @@
 
             <v-data-table
               :headers="headersInf"
-              :items="editInf.grades"
+              :items="editInf.grades.grade"
               :items-per-page="5"
               class="elevation-1"
             >
@@ -34,8 +34,8 @@
         </v-card-text>
         <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn small color="blue darken-1" dark @click="showEdit = false">Close</v-btn>
-        <v-btn small color="blue darken-1" dark @click="showEdit = false, save()">Save</v-btn>
+        <v-btn small color="blue darken-1" dark @click="close()">Close</v-btn>
+        <v-btn small color="blue darken-1" dark @click="save()">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -92,11 +92,7 @@ export default {
         skippingReason: '',
         skippingNoReason: ''
       },
-      headersInf: [{
-        text: 'Имя студента',
-        align: 'left',
-        value: 'FullName'
-      }],
+      headersInf: [],
       headers: [
         {
           text: 'Имя студента',
@@ -125,6 +121,7 @@ export default {
     count (newCount, oldCount) {
       this.students.data = newCount.students
       this.headers.push(newCount.headers)
+      this.headersInf.push(newCount.headersGrades)
     },
     lessons (newCount, oldCount) {
       let head = this.headers
@@ -136,6 +133,60 @@ export default {
           }
         )
       })
+    },
+    grades (newCount, oldCount) {
+      let head = this.headers
+      let store = this.$store.state.user
+      store.students.forEach(function callback (element, index) {
+        if (element.lessonTitle0.grades) {
+          head.push(
+            {
+              text: store.lessons[0].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+        if (element.lessonTitle1.grades) {
+          head.push(
+            {
+              text: store.lessons[1].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+        if (element.lessonTitle2.grades) {
+          head.push(
+            {
+              text: store.lessons[2].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+        if (element.lessonTitle3.grades) {
+          head.push(
+            {
+              text: store.lessons[3].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+        if (element.lessonTitle4.grades) {
+          head.push(
+            {
+              text: store.lessons[4].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+        if (element.lessonTitle5.grades) {
+          head.push(
+            {
+              text: store.lessons[5].lessonTitle,
+              value: 'grades'
+            }
+          )
+        }
+      })
     }
   },
 
@@ -143,14 +194,21 @@ export default {
     edit (id, lesson) {
       this.editInfId = id
       this.editInfLesson = lesson
-      console.log(this.editInfLesson)
       this.editInf = this.students[id]
       this.showEdit = true
-
-      console.log(this.$store.state.user.students)
+      this.editInf.grades = []
     },
     save () {
       this.addSkeap()
+      this.showEdit = false
+      this.editInf.grade = ''
+      this.editInf.grades = []
+    },
+
+    close () {
+      this.editInf.grade = ''
+      this.editInf.grades = []
+      this.showEdit = false
     },
 
     addSkeap () {
@@ -158,6 +216,7 @@ export default {
         case 'lessonTitle0':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle0',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -166,6 +225,7 @@ export default {
         case 'lessonTitle1':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle1',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -174,6 +234,7 @@ export default {
         case 'lessonTitle2':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle2',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -182,6 +243,7 @@ export default {
         case 'lessonTitle3':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle3',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -190,6 +252,7 @@ export default {
         case 'lessonTitle4':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle4',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -198,6 +261,7 @@ export default {
         case 'lessonTitle5':
           this.$store.dispatch('addSkeap', {
             lesson: 'lessonTitle5',
+            student: this.editInfId,
             skippingReason: this.editInf.skippingReason,
             skippingNoReason: this.editInf.skippingNoReason
           })
@@ -206,29 +270,30 @@ export default {
     },
 
     addGrade () {
+      this.editInf.grades.push(this.editInf.grade)
       switch (this.editInfLesson) {
         case 'lessonTitle0':
           this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
 
         case 'lessonTitle1':
-          this.$store.dispatch('addGrade', 'lessonTitle1', this.editInf.grade, this.editInfId)
+          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
 
         case 'lessonTitle2':
-          this.$store.dispatch('addGrade', 'lessonTitle2', this.editInf.grade, this.editInfId)
+          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
 
         case 'lessonTitle3':
-          this.$store.dispatch('addGrade', 'lessonTitle3', this.editInf.grade, this.editInfId)
+          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
 
         case 'lessonTitle4':
-          this.$store.dispatch('addGrade', 'lessonTitle4', this.editInf.grade, this.editInfId)
+          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
 
         case 'lessonTitle5':
-          this.$store.dispatch('addGrade', 'lessonTitle5', this.editInf.grade, this.editInfId)
+          this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
           break
       }
     }

@@ -129,7 +129,6 @@ export default {
           lessonGrade: null,
           lessonHours: null
         }
-        console.log(this.$store.state.user.lessons)
         this.notification.snackbar = true
       }
     }
