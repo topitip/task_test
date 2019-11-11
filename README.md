@@ -1,6 +1,25 @@
 # task_test_codeinside
 Приложение с системой принятия решений (получит ли студен зачёт)
 
+Для запуска приложения необходимо установить необходимые пакеты
+
+(apt-get install (Ubuntu) / pacman -S (Arch) / brew install (Mac OS)):
+
+npm, nodejs
+
+### Установка зависимостей
+
+```
+systemctl enable nginx
+systemctl start nginx
+```
+Add virtual host:
+
+```bash
+echo "127.0.0.1     xdocs.local" >> /etc/hosts
+echo "10.222.222.171 xdocs.cloud.local" >> /etc/hosts
+```
+
 ### Конфигурация nginx
 
 ```nginx
@@ -27,11 +46,6 @@ server {
   }
 }
 ```
-Для запуска приложения необходимо установить необходимые пакеты
-
-(apt-get install (Ubuntu) / pacman -S (Arch) / brew install (Mac OS)):
-
-npm, nodejs
 
 ### frontend
 cd frontend
