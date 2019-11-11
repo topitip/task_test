@@ -22,13 +22,16 @@
                 <v-text-field v-model="editInf.grade" label="Оценка"></v-text-field>
               </v-flex>
             </v-layout>
-
+            <p>Добавленные оценки</p>
             <v-data-table
               :headers="headersInf"
-              :items="editInf.grades.grade"
+              :items="editInfGrades"
               :items-per-page="5"
               class="elevation-1"
             >
+            <template v-slot:item.grade="{ item }">
+              {{ item.grade }}
+            </template>
             </v-data-table>
           </v-container>
         </v-card-text>
@@ -87,12 +90,17 @@ export default {
       editInfLesson: undefined,
       editInf: {
         grade: '',
-        grades: [],
         FullName: '',
         skippingReason: '',
         skippingNoReason: ''
       },
-      headersInf: [],
+      editInfGrades: [],
+      headersInf: [
+        {
+          text: 'Оценки',
+          align: 'left',
+          value: 'grade'
+        }],
       headers: [
         {
           text: 'Имя студента',
@@ -196,7 +204,7 @@ export default {
       this.editInfLesson = lesson
       this.editInf = this.students[id]
       this.showEdit = true
-      this.editInf.grades = []
+      this.editInfGrades = []
     },
     save () {
       this.addSkeap()
@@ -270,7 +278,8 @@ export default {
     },
 
     addGrade () {
-      this.editInf.grades.push(this.editInf.grade)
+      this.editInfGrades.push({ grade: this.editInf.grade })
+      console.log(this.editInfGrades)
       switch (this.editInfLesson) {
         case 'lessonTitle0':
           this.$store.dispatch('addGrade', { lesson: 'lessonTitle0', grade: this.editInf.grade, student: this.editInfId })
@@ -300,7 +309,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
